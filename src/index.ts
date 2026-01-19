@@ -5,9 +5,10 @@ import { runMigrations } from './database/migrations'
 
 const app = express()
 
+runMigrations()
 app.use(express.json())
 app.use(router)
-runMigrations()
+
 
 const port = Number(process.env.PORT) || 3000
 
