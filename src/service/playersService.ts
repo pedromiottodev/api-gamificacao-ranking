@@ -5,9 +5,15 @@ type CreatePlayerInput = {
     name: string
     email: string
 }
+type Player = {
+  id: string
+  name: string
+  email: string
+  created_at: string
+}
 
 type ServiceResult =
-    | { ok: true, player: any }
+    | { ok: true, player: Player }
     | { ok: false, statusCode: number, message: string }
 
 

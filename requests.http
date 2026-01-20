@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:3333
+@json = application/json
+
+### Health
+GET {{baseUrl}}/health
+
+### Criar player (OK, 201 created)
+###Criar player (email duplicado -> 409 conflict)
+### Criar player (body inválido -> 400 bad request)
+POST http://localhost:3333/players
+Content-Type: application/json
+
+{
+  "name": "Pedro",
+  "email": "pedroteste@email.com"
+}

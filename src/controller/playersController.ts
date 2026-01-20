@@ -7,7 +7,7 @@ const createPlayerValidator = z.object({
     email: z.string().email()
 })
 
-class CreatePlayerController {
+export class CreatePlayerController {
     handle(req: Request, res: Response) {
         const parsed = createPlayerValidator.safeParse(req.body)
 
