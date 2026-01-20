@@ -8,5 +8,13 @@ export function runMigrations() {
       email TEXT NOT NULL UNIQUE,
       created_at TEXT NOT NULL
     );
+
+    CREATE TABLE IF NOT EXISTS challenges (
+      id TEXT PRIMARY KEY,
+      title TEXT NOT NULL,
+      description TEXT NOT NULL UNIQUE,
+      start_date TEXT NOT NULL,
+      end_date,
+      created_at);
   `)
 }

@@ -1,6 +1,6 @@
 import { z } from "zod"
 import { Request, Response } from "express"
-import { CreatePlayerService } from "../service/playersService"
+import { CreatePlayerService } from "../service/createPlayerService"
 
 const createPlayerValidator = z.object({
     name: z.string().min(1),
@@ -30,5 +30,3 @@ export class CreatePlayerController {
 
     }
 }
-
-
