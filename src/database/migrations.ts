@@ -15,6 +15,7 @@ export function runMigrations() {
       description TEXT NOT NULL UNIQUE,
       start_date TEXT NOT NULL,
       end_date,
-      created_at);
+      created_at
+      );
   `)
 }

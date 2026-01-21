@@ -6,10 +6,10 @@ type CreatePlayerInput = {
     email: string
 }
 type Player = {
-  id: string
-  name: string
-  email: string
-  created_at: string
+    id: string
+    name: string
+    email: string
+    created_at: string
 }
 
 type ServiceResult =
@@ -31,9 +31,9 @@ export class CreatePlayerService {
         const createdAt = new Date().toISOString()
 
         db.prepare(`
-      INSERT INTO players (id, name, email, created_at)
-      VALUES (?, ?, ?, ?)
-    `).run(id, name, email, createdAt)
+            INSERT INTO players (id, name, email, created_at)
+            VALUES (?, ?, ?, ?)
+        `).run(id, name, email, createdAt)
 
         return {
             ok: true,

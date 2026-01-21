@@ -1,10 +1,11 @@
 import { z } from "zod"
 import { Request, Response } from "express"
-import { GetPlayerByIdService } from "../service/getPlayerByIdService"
+import { GetChallengeByIdService } from "../service/getChallengeByIdService"
 
 const idValidator = z.string().uuid()
 
-export class GetPlayerByIdController {
+
+export class GetChallengeByIdController {
     handle(req: Request, res: Response) {
         const parsed = idValidator.safeParse(req.params.id)
 
@@ -15,15 +16,14 @@ export class GetPlayerByIdController {
             })
         }
 
-        const getPlayerByIdService = new GetPlayerByIdService()
+        const getChallengeByIdService = new GetChallengeByIdService()
 
-        const result = getPlayerByIdService.execute({id: parsed.data})
+        const result = getChallengeByIdService.execute({ id: parsed.data })
 
         if (!result.ok) {
             return res.status(result.statusCode).json({ message: result.message })
         }
 
-        return res.status(200).json(result.player)
-
+        return res.status(200).json(result.challenge)
     }
 }

@@ -1,3 +1,4 @@
+###rotas de jogadores
 ### Criar player (OK, 201 created)
 ### Criar player (email duplicado -> 409 conflict)
 ### Criar player (body inválido -> 400 bad request)
@@ -9,9 +10,27 @@ Content-Type: application/json
   "email": "pedroteste@email.com"
 }
 
-###
+### 
 
 GET http://localhost:3333/players
 
+
 ###
 GET http://localhost:3333/players/eabf0b97-b30e-4090-8fab-fe782e101858
+
+### rotas de challenges
+POST http://localhost:3333/challenges
+Content-Type: application/json
+
+{
+  "title": "Desafio Teste 2",
+  "description": "Primeiro Teste 2",
+  "start_date": "2026-01-21T10:00:00.000Z",
+  "end_date": "2026-01-27T18:00:00.000Z"
+}
+
+###
+GET http://localhost:3333/challenges
+
+###
+GET http://localhost:3333/challenges/0a5b8d81-2f3a-4a09-ad33-1eae4b4494da

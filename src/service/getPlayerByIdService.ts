@@ -20,7 +20,7 @@ export class GetPlayerByIdService {
     execute({ id }: Id): ServiceResult {
         const player = db
             .prepare('SELECT id, name, email, created_at FROM players WHERE id = ?')
-            .get(id) as Player
+            .get(id) as Player | undefined
 
         if (!player) {
             return { ok: false, statusCode: 404, message: "Id não encontrado" }
