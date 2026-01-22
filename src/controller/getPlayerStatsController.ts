@@ -2,17 +2,15 @@ import { Request, Response } from 'express'
 import { z } from 'zod'
 import { GetPlayerStatsService } from '../service/getPlayerStatsService'
 
-const idValidator = z.string().uuid()
+const idValidator = z.uuid()
 
 export class GetPlayerStatsController {
   handle(req: Request, res: Response) {
     const parsedId = idValidator.safeParse(req.params.id)
 
     if (!parsedId.success) {
-      return res.status(400).json({
-        message: 'Id inválido',
-        errors: parsedId.error.flatten()
-      })
+      const errors = z.treeifyError(parsedId.error)
+      return res.status(400).json({ message: "Dados inválidos", errors })
     }
 
     const service = new GetPlayerStatsService()

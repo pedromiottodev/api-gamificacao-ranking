@@ -2,7 +2,7 @@ import { z } from "zod"
 import { Request, Response } from "express"
 import { CreateChallengeService } from "../service/createChallengeService"
 
-const createChallengeValidator = z.object({
+const challengeValidator = z.object({
     title: z.string().min(1),
     description: z.string().min(1),
     start_date: z.string().min(1),
@@ -11,13 +11,11 @@ const createChallengeValidator = z.object({
 
 export class CreateChallengeController {
     handle(req: Request, res: Response) {
-        const parsed = createChallengeValidator.safeParse(req.body)
+        const parsed = challengeValidator.safeParse(req.body)
 
         if (!parsed.success) {
-            return res.status(400).json({
-                message: "Dados inválidos",
-                errors: parsed.error.flatten()
-            })
+            const errors = z.flattenError(parsed.error)
+            return res.status(400).json({ message: "Dados inválidos", errors })
         }
 
         const startMs = Date.parse(parsed.data.start_date)

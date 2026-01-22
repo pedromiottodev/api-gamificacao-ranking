@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import { z } from "zod"
 import { GetChallengeRankingService } from "../service/getChallengeRankingService"
 
-const idValidator = z.string().uuid()
+const idValidator = z.uuid()
 const limitValidator = z.coerce.number().int().min(1).max(100).default(10)
 
 export class GetChallengeRankingController {
@@ -10,23 +10,19 @@ export class GetChallengeRankingController {
         const parsedId = idValidator.safeParse(req.params.id)
 
         if (!parsedId.success) {
-            return res.status(400).json({
-                message: "Id inválido",
-                errors: parsedId.error.flatten()
-            })
+            const errors = z.treeifyError(parsedId.error)
+            return res.status(400).json({ message: "Dados inválidos", errors })
         }
 
-        const parsedLimit = limitValidator.safeParse(req.query.limit)
+        const parsedIdLimit = limitValidator.safeParse(req.query.limit)
 
-        if (!parsedLimit.success) {
-            return res.status(400).json({
-                message: "Limit inválido",
-                errors: parsedLimit.error.flatten()
-            })
+        if (!parsedIdLimit.success) {
+            const errors = z.treeifyError(parsedIdLimit.error)
+            return res.status(400).json({ message: "Dados inválidos", errors })
         }
 
         const service = new GetChallengeRankingService()
-        const ranking = service.execute(parsedId.data, parsedLimit.data)
+        const ranking = service.execute(parsedId.data, parsedIdLimit.data)
 
         const rankingWithPosition = []
         let lastPoints: number | null = null

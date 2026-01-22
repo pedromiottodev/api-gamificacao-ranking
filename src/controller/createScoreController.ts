@@ -3,8 +3,8 @@ import { Request, Response } from "express"
 import { CreateScoreService } from "../service/createScoreService"
 
 const scoreValidator = z.object({
-    player_id: z.string().uuid(),
-    challenge_id: z.string().uuid(),
+    player_id: z.uuid(),
+    challenge_id: z.uuid(),
     points: z.number().int().min(0)
 })
 
@@ -13,10 +13,8 @@ export class CreateScoreController {
         const parsed = scoreValidator.safeParse(req.body)
 
         if (!parsed.success) {
-            return res.status(400).json({
-                message: "Dados inválidos, informe uma pontuação maior ou igual a 0",
-                errors: parsed.error.flatten()
-            })
+            const errors = z.flattenError(parsed.error)
+            return res.status(400).json({ message: "Dados inválidos", errors })
         }
 
         const createScoreService = new CreateScoreService()

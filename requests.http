@@ -6,8 +6,8 @@ POST http://localhost:3333/players
 Content-Type: application/json
 
 {
-  "name": "Pedro",
-  "email": "pedroteste@email.com"
+  "name": "bobysvaldo",
+  "email": "bobyemail.com"
 }
 
 ### 

@@ -2,21 +2,20 @@ import { z } from "zod"
 import { Request, Response } from "express"
 import { CreatePlayerService } from "../service/createPlayerService"
 
-const createPlayerValidator = z.object({
+const playerValidator = z.object({
     name: z.string().min(1),
-    email: z.string().email()
+    email: z.email("Email inválido")
 })
 
 export class CreatePlayerController {
     handle(req: Request, res: Response) {
-        const parsed = createPlayerValidator.safeParse(req.body)
+        const parsed = playerValidator.safeParse(req.body)
 
         if (!parsed.success) {
-            return res.status(400).json({
-                message: "Dados inválidos",
-                errors: parsed.error.flatten()
-            })
+            const errors = z.treeifyError(parsed.error)
+            return res.status(400).json(errors)
         }
+
 
         const createPlayerService = new CreatePlayerService()
 

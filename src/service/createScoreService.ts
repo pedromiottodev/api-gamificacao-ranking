@@ -15,7 +15,6 @@ type Score = {
     created_at: string
 }
 
-
 type ServiceResult =
     | { ok: true, score: Score }
     | { ok: false, statusCode: number, message: string }
@@ -51,7 +50,7 @@ export class CreateScoreService {
             return { ok: false, statusCode: 400, message: 'Fora do período do desafio' }
         }
 
-        if (Number.isNaN(startMs) || Number.isNaN(endMs)) return { ok:false, statusCode: 500, message: 'Período do desafio inválido' }
+        if (Number.isNaN(startMs) || Number.isNaN(endMs)) return { ok: false, statusCode: 500, message: 'Período do desafio inválido' }
 
         const id = randomUUID()
         const created_at = new Date().toISOString()

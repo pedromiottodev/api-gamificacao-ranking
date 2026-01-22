@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
 import { ListPlayersService } from "../service/listPlayersService"
 
-
 export class ListPlayersController {
     handle(req: Request, res: Response) {
 
