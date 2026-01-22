@@ -17,7 +17,7 @@ export class GetPlayerByIdController {
 
         const getPlayerByIdService = new GetPlayerByIdService()
 
-        const result = getPlayerByIdService.execute({id: parsed.data})
+        const result = getPlayerByIdService.execute({ id: parsed.data })
 
         if (!result.ok) {
             return res.status(result.statusCode).json({ message: result.message })

@@ -10,12 +10,12 @@ type CreateChallengeInput = {
 }
 
 type Challenge = {
-  id: string
-  title: string
-  description: string
-  start_date: string
-  end_date: string
-  created_at: string
+    id: string
+    title: string
+    description: string
+    start_date: string
+    end_date: string
+    created_at: string
 }
 
 type ServiceResult =
@@ -24,10 +24,18 @@ type ServiceResult =
 
 
 export class CreateChallengeService {
-    execute({title, description, start_date, end_date}: CreateChallengeInput): ServiceResult {
+    execute({ title, description, start_date, end_date }: CreateChallengeInput): ServiceResult {
         const id = randomUUID()
         const created_at = new Date().toISOString()
 
+        const existingId = db
+            .prepare('SELECT * FROM challenges WHERE description = ?')
+            .get(description)
+        
+        if (existingId) {
+            return { ok: false, statusCode: 409, message: "Descrição já cadastrada" }
+        }
+        
         db.prepare(`
             INSERT INTO challenges (id, title, description, start_date, end_date, created_at)
             VALUES (?, ?, ?, ?, ?, ?)

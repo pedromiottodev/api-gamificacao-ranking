@@ -16,6 +16,17 @@ export function runMigrations() {
       start_date TEXT NOT NULL,
       end_date,
       created_at
-      );
+    );
+
+    CREATE TABLE IF NOT EXISTS scores (
+      id TEXT PRIMARY KEY,
+      player_id TEXT NOT NULL,
+      challenge_id TEXT NOT NULL,
+      points INTEGER NOT NULL,
+      created_at TEXT NOT NULL,
+      FOREIGN KEY (player_id) REFERENCES players(id),
+      FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+    );
+
   `)
 }

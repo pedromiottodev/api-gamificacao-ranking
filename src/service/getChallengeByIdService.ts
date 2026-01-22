@@ -19,6 +19,7 @@ type ServiceResult =
 
 export class GetChallengeByIdService {
     execute({ id }: Id): ServiceResult {
+
         const challenge = db
             .prepare('SELECT * FROM challenges WHERE id = ?')
             .get(id) as Challenge | undefined
