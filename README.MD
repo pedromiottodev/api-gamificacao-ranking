@@ -22,12 +22,12 @@ yarn
 Criar arquivo .env
 
 env
-Copiar código
+
 PORT=3333
 Rodar API
 
 bash
-Copiar código
+
 yarn dev
 Endpoints
 Health
@@ -71,7 +71,7 @@ Testes manuais
 A pasta requests/ contém arquivos .http para testar com a extensão REST Client do VSCode.
 
 yaml
-Copiar código
+
 
 ---
 
@@ -81,7 +81,7 @@ Crie a pasta:
 requests/
 
 bash
-Copiar código
+
 
 ### 1) `requests.http`
 ```http
@@ -102,7 +102,7 @@ Content-Type: {{json}}
 GET {{baseUrl}}/players
 2) requests/challenges.http
 http
-Copiar código
+
 @baseUrl = http://localhost:3333
 @json = application/json
 
@@ -121,7 +121,7 @@ Content-Type: {{json}}
 GET {{baseUrl}}/challenges
 3) requests/scores.http
 http
-Copiar código
+
 @baseUrl = http://localhost:3333
 @json = application/json
 
@@ -136,21 +136,21 @@ Content-Type: {{json}}
 }
 4) requests/ranking.http
 http
-Copiar código
+
 @baseUrl = http://localhost:3333
 
 ### Ranking do challenge (top 10)
 GET {{baseUrl}}/challenges/COLE_ID_CHALLENGE/ranking?limit=10
 5) requests/stats.http
 http
-Copiar código
+
 @baseUrl = http://localhost:3333
 
 ### Stats do player
 GET {{baseUrl}}/players/COLE_ID_PLAYER/stats
 6) requests/flow.http (fluxo completo)
 http
-Copiar código
+
 @baseUrl = http://localhost:3333
 @json = application/json
 
