@@ -28,6 +28,21 @@ export class GetChallengeRankingController {
         const service = new GetChallengeRankingService()
         const ranking = service.execute(parsedId.data, parsedLimit.data)
 
-        return res.status(200).json(ranking)
+        const rankingWithPosition = []
+        let lastPoints: number | null = null
+        let lastPosition = 0
+
+        for (let i = 0; i < ranking.length; i++) {
+            const row = ranking[i]
+            const position = lastPoints === row.total_points ? lastPosition : i + 1
+
+            rankingWithPosition.push({ position, ...row })
+
+            lastPoints = row.total_points
+            lastPosition = position
+        }
+
+        return res.status(200).json(rankingWithPosition)
+
     }
 }

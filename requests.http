@@ -12,42 +12,57 @@ Content-Type: application/json
 
 ### 
 
+#listar jogadores
 GET http://localhost:3333/players
 
+### 
 
-### get by id
+#pegar jogadores por id
 GET http://localhost:3333/players/eabf0b97-b30e-4090-8fab-fe782e101858
 
+
 ### rotas de challenges
-###ROTA SEMPRE MARCA QUE ESTÁ FORA DO PERÍODO DE DESAFIO, NÃO CONSEGUI TESTAR
+
+#cria uma challenge
 POST http://localhost:3333/challenges
 Content-Type: application/json
 
 {
-  "title": "Desafio do gol",
-  "description": "quem faz mais gols",
+  "title": "Desafio da corrida",
+  "description": "quem corre mais km",
   "start_date": "2026-01-02T10:00:00.000Z",
   "end_date": "2026-02-27T18:00:00.000Z"
 }
 
 ###
+
+#listar challenges
 GET http://localhost:3333/challenges
 
-###
-GET http://localhost:3333/challenges/0a5b8d81-2f3a-4a09-ad33-1eae4b4494da
+### 
 
-###rotas de score
+#buscar challenge por id
+GET http://localhost:3333/challenges/53e4aa8b-6c8e-4169-97f5-cd88e8c6adc3
+
+
+###rota de score
+
+
+#criar um score
 POST http://localhost:3333/scores
 Content-Type: application/json
 
 {
-  "player_id": "4cf6ec9b-4c14-41a3-b016-02782b3fecfa",
+  "player_id": "eabf0b97-b30e-4090-8fab-fe782e101858",
   "challenge_id": "3ee16c02-4f66-44ff-9218-52c48e5e929c",
-  "points": 21
+  "points": -1
 }
 
-###rota de ranking
-GET http://localhost:3333/challenges/4cf6ec9b-4c14-41a3-b016-02782b3fecfa/ranking?limit=10
 
-### best challenge
-GET http://localhost:3333/players/4cf6ec9b-4c14-41a3-b016-02782b3fecfa/stats
+###rota de ranking
+
+#pontos totais dos jogadores em uma challenge
+GET http://localhost:3333/challenges/3ee16c02-4f66-44ff-9218-52c48e5e929c/ranking
+
+### best challenge por jogador
+GET http://localhost:3333/players/eabf0b97-b30e-4090-8fab-fe782e101858/stats
